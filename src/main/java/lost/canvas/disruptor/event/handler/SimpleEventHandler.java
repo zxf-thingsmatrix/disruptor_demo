@@ -1,14 +1,15 @@
 package lost.canvas.disruptor.event.handler;
 
 import com.lmax.disruptor.EventHandler;
-import com.lmax.disruptor.LifecycleAware;
 import lost.canvas.disruptor.event.SimpleEvent;
 
 /**
  * @author xinfan.zhou@things-matrix.com
  * @date 2020/06/30 12:13
  */
-public class SimpleEventHandler implements EventHandler<SimpleEvent>, LifecycleAware {
+public class SimpleEventHandler<T> implements EventHandler<SimpleEvent<T>>
+//,LifecycleAware
+{
 
     private final String name;
 
@@ -17,17 +18,17 @@ public class SimpleEventHandler implements EventHandler<SimpleEvent>, LifecycleA
     }
 
     @Override
-    public void onEvent(SimpleEvent event, long sequence, boolean endOfBatch) throws Exception {
-        System.out.printf("[thread:%s] [SimpleEventHandler:%s] handle [SimpleEvent:%d] [seq:%d] [endofBatch:%b]\n", Thread.currentThread().getName(),name, event.value,sequence,endOfBatch);
+    public void onEvent(SimpleEvent<T> event, long sequence, boolean endOfBatch) throws Exception {
+        System.out.printf("[thread:%s] [SimpleEventHandler:%s] handle [SimpleEvent:%s]\n", Thread.currentThread().getName(), name, event.value.toString());
     }
 
-    @Override
-    public void onStart() {
-        System.out.printf(">>>>>>>>>> [SimpleEventHandler:%s] start\n", name);
-    }
-
-    @Override
-    public void onShutdown() {
-        System.out.printf(">>>>>>>>>> [SimpleEventHandler:%s] shutdown\n", name);
-    }
+//    @Override
+//    public void onStart() {
+//        System.out.printf(">>>>>>>>>> [SimpleEventHandler:%s] start\n", name);
+//    }
+//
+//    @Override
+//    public void onShutdown() {
+//        System.out.printf(">>>>>>>>>> [SimpleEventHandler:%s] shutdown\n", name);
+//    }
 }
