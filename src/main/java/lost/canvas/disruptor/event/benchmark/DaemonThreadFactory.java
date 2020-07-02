@@ -1,4 +1,4 @@
-package lost.canvas.disruptor.benchmark;
+package lost.canvas.disruptor.event.benchmark;
 
 import java.util.concurrent.ThreadFactory;
 
